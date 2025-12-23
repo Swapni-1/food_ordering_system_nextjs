@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  user_id String @id @default(cuid())
+  name String?
+  username String? @unique
+  email String? @unique
+  password String
+  role Role @default(CUSTOMER)
+  cart Cart[]
+  order Order[]
+}
+
+enum Role{
+  ADMIN
+  CUSTOMER
+}
+model Category{
+  category_id String @id @default(cuid())
+  name String
+  slug String @unique
+  food Food[] @relation("FoodCategories")
+}
+
+model Food{
+  food_id String @id @default(cuid())
+  name String
+  description String @db.Text
+  foodImg String
+  price Int
+  categories Category[] @relation("FoodCategories")
+  cart Cart[] 
+  order Order[] @relation("FoodOrder")
+}
+
+model Cart{
+  cart_id String @id @default(cuid())
+  user_id String
+  food_id String 
+
+  user User @relation(fields: [user_id],references: [user_id],onDelete: Cascade,onUpdate: Cascade)
+  food Food @relation(fields: [food_id],references: [food_id],onDelete: Cascade,onUpdate: Cascade)
+  @@unique([user_id,food_id])
+}
+
+model Order{
+  order_id String @id @default(cuid())
+  user_id String
+  amount Int
+  food Food[] @relation("FoodOrder")
+  createdAt DateTime @default(now())
+  user User @relation(fields: [user_id],references: [user_id],onDelete: Cascade,onUpdate: Cascade)
+}
+
+
+
