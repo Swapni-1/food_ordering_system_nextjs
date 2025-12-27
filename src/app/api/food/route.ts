@@ -27,6 +27,6 @@ export async function POST(req : Request){
         },
     })
 
-    return NextResponse.json(foodData);
+    return NextResponse.json(categoryData);
     // return NextResponse.json({hello : "world"});
 }

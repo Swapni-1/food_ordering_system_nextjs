@@ -137,7 +137,7 @@ export default function Checkout(){
                                     <h1>Total</h1>
                                     <h1>₹{(totalAmount + deliveryCharges + totalAmount * (8/100)).toFixed(2)}</h1>
                                 </div>
-                                {
+                                {/* {
                                     totalAmount > 0 &&
                                     <PayPalButtons 
                                         style={{layout : "horizontal"}}
@@ -155,9 +155,11 @@ export default function Checkout(){
                                             })
                                         }}
                                     />
+                                } */}
+                                {
+                                    totalAmount > 0 &&
+                                    <Button className="font-bold text-[15px]" onClick={addToOrder}>Make Payment</Button>
                                 }
-                                
-                                {/* <Button className="font-bold text-[15px]">Make Payment</Button> */}
                             </div>
                             
                         </div>
