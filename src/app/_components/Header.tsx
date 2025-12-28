@@ -15,6 +15,7 @@ import axios from "axios";
 import useSWR from "swr";
 import { useMutateCart } from "../_hooks/useMutateCart";
 import {useSearchStore} from "../_hooks/useSearch"
+import { deleteAllCookies } from "@/lib/removeAllCookies";
 
 
 export default function Header(){
@@ -40,10 +41,7 @@ export default function Header(){
     },[])
 
     function handleLogout(){
-        // 1. Manually clear the cookie
-        document.cookie = "next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        // Also clear the secure version just in case
-        document.cookie = "__Secure-next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; samesite=lax; secure";
+        deleteAllCookies();
         signOut({callbackUrl : "/",redirect : true})
         .then(() => {
             toast.success('Logged out successfully', {

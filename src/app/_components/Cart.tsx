@@ -54,7 +54,7 @@ export default function Cart({cart}){
                 cart && cart.map((item,index) => (
                     <div key={index} className="flex justify-between items-center">
                         <div className="flex gap-2 justify-center items-center">
-                            <Image src={item.food.foodImg} alt={item.food.name} width={40} height={40} className="h-[40px] w-[40px] rounded-lg object-cover"/>
+                            <Image src={item.food.foodImg} alt={item.food.name} width={40} height={40} unoptimized={true} className="h-[40px] w-[40px] rounded-lg object-cover"/>
                             <h2 className="text-sm font-semibold">{item.food.name}</h2>
                         </div>
                         <h2 className="font-bold flex justify-center items-center gap-2">₹{item.food.price} <X onClick={() =>  handleRemoveFromCart(item.cart_id)} className="h-4 w-4 text-red-500 cursor-pointer"/></h2>

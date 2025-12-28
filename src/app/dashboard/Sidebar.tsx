@@ -7,6 +7,7 @@ import {useRouter,usePathname} from "next/navigation"
 import pascalcase from "pascalcase"
 import {signOut} from "next-auth/react"
 import { Bounce, toast } from "react-toastify";
+import {deleteAllCookies} from "@/lib/removeAllCookies";
 
 
 export default function Sidebar(){
@@ -42,10 +43,7 @@ export default function Sidebar(){
             break;
 
             case "Logout" :
-            // 1. Manually clear the cookie
-            document.cookie = "next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            // Also clear the secure version just in case
-            document.cookie = "__Secure-next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; samesite=lax; secure"; 
+            deleteAllCookies();
             signOut({callbackUrl : "/",redirect : true})
             .then(() => {
                 // router.push("/")
