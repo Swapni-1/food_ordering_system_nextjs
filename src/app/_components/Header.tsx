@@ -40,7 +40,7 @@ export default function Header(){
     },[])
 
     function handleLogout(){
-        signOut()
+        signOut({callbackUrl : "/",redirect : true})
         .then(() => {
             toast.success('Logged out successfully', {
                 position: "top-right",

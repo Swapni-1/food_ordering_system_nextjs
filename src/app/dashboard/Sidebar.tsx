@@ -41,7 +41,7 @@ export default function Sidebar(){
             case "Order" : router.push("/dashboard/order")
             break;
 
-            case "Logout" : signOut()
+            case "Logout" : signOut({callbackUrl : "/",redirect : true})
             .then(() => {
                 // router.push("/")
                 toast.success('Logout Successful', {
