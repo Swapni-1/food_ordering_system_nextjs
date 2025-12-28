@@ -41,7 +41,12 @@ export default function Sidebar(){
             case "Order" : router.push("/dashboard/order")
             break;
 
-            case "Logout" : signOut({callbackUrl : "/",redirect : true})
+            case "Logout" :
+            // 1. Manually clear the cookie
+            document.cookie = "next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            // Also clear the secure version just in case
+            document.cookie = "__Secure-next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; samesite=lax; secure"; 
+            signOut({callbackUrl : "/",redirect : true})
             .then(() => {
                 // router.push("/")
                 toast.success('Logout Successful', {

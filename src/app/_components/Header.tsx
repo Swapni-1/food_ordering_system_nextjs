@@ -40,6 +40,10 @@ export default function Header(){
     },[])
 
     function handleLogout(){
+        // 1. Manually clear the cookie
+        document.cookie = "next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        // Also clear the secure version just in case
+        document.cookie = "__Secure-next-auth.session-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; samesite=lax; secure";
         signOut({callbackUrl : "/",redirect : true})
         .then(() => {
             toast.success('Logged out successfully', {

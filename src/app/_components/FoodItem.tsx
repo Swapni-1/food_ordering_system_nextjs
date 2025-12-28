@@ -53,6 +53,7 @@ export default function FoodItem({src,name,price,description,foodId}){
                 alt={name}
                 width={120}
                 height={120}
+                unoptimized={true}
                 className="object-cover w-[120px] h-[120px] rounded-xl"
             />
             <div className="flex flex-col gap-1">
