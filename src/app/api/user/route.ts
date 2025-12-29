@@ -1,9 +1,10 @@
-import { prisma } from "@/lib/prisma";
+iimport { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import {Role} from "@prisma/client"
 
 export async function GET(){
 
-    const user = await prisma.user.findMany({where :{NOT : {username : "admin"}}});
+    const user = await prisma.user.findMany({where :{NOT : {role : Role.ADMIN}}});
 
     return NextResponse.json(user);
 }
